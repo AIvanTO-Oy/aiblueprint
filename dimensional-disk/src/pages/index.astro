@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Crack from '../components/Crack.astro';
 import HeroVisual from '../components/HeroVisual.astro';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const logoSrc = `${base}/aivanto-logo.jpg`;
+
 const contact = {
 	email: 'marko.maatta@aivanto.fi',
 	phone: '044 592 3414',
@@ -93,7 +96,7 @@ const icons: Record<string, string> = {
 	<header class="site-header">
 		<div class="container header-inner">
 			<a href="#top" class="brand" aria-label="AIvanTO – etusivulle">
-				<img src="/aivanto-logo.jpg" alt="AIvanTO" width="3896" height="1088" />
+				<img src={logoSrc} alt="AIvanTO" width="3896" height="1088" />
 			</a>
 			<nav aria-label="Päävalikko">
 				<ul>
@@ -361,7 +364,7 @@ const icons: Record<string, string> = {
 	<footer class="site-footer">
 		<Crack />
 		<div class="container footer-inner">
-			<img src="/aivanto-logo.jpg" alt="AIvanTO" class="footer-logo" width="3896" height="1088" loading="lazy" />
+			<img src={logoSrc} alt="AIvanTO" class="footer-logo" width="3896" height="1088" loading="lazy" />
 			<p>{contact.company} • Y-tunnus {contact.businessId}</p>
 			<p>© {new Date().getFullYear()} {contact.company}</p>
 		</div>
