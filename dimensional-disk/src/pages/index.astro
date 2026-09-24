@@ -104,6 +104,7 @@ const icons: Record<string, string> = {
 					<li><a href="#sisalto">Sisältö</a></li>
 					<li><a href="#prosessi">Prosessi</a></li>
 					<li><a href="#paketit">Paketit</a></li>
+					<li><a href="#koulutukset">Koulutukset</a></li>
 				</ul>
 			</nav>
 			<a href="#yhteys" class="btn btn-primary header-cta">Ota yhteyttä</a>
@@ -332,6 +333,32 @@ const icons: Record<string, string> = {
 					</div>
 					<a href="#yhteys" class="btn btn-light">Varaa keskustelu</a>
 				</aside>
+
+				<aside id="koulutukset" class="addon">
+					<span class="addon-icon" aria-hidden="true">
+						<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 9v6"></path>
+						</svg>
+					</span>
+					<div class="addon-body">
+						<span class="eyebrow">Lisäpalvelu</span>
+						<h3>Koulutukset</h3>
+						<p>
+							Tekoälykoulutukset strategian tueksi. Laajuus ja sisältö sovitaan organisaatiosi tarpeiden
+							mukaan.
+						</p>
+					</div>
+					<div class="addon-price">
+						<p class="price"><span class="from">alkaen</span>1 200 €</p>
+						<p class="addon-note">alv 0 %, hinta riippuu koulutuksen laajuudesta ja sisällöstä</p>
+						<a
+							href={`mailto:${contact.email}?subject=${encodeURIComponent('AI Strategy Blueprint – Koulutukset')}`}
+							class="btn btn-secondary"
+						>
+							Kysy koulutuksista
+						</a>
+					</div>
+				</aside>
 			</div>
 		</section>
 
@@ -386,10 +413,10 @@ const icons: Record<string, string> = {
 		align-items: center;
 		justify-content: space-between;
 		gap: 24px;
-		height: 76px;
+		height: 96px;
 	}
 	.brand img {
-		height: 48px;
+		height: 68px;
 		width: auto;
 		mix-blend-mode: multiply; /* logon kermanvärinen tausta sulautuu sivun taustaan */
 	}
@@ -790,6 +817,51 @@ const icons: Record<string, string> = {
 	.recommend .btn {
 		flex: none;
 	}
+	.addon {
+		margin-top: 24px;
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		gap: 28px;
+		align-items: center;
+		background: var(--white);
+		border: 1px solid var(--line);
+		border-left: 5px solid var(--orange);
+		border-radius: var(--radius);
+		padding: 32px 36px;
+		box-shadow: var(--shadow);
+	}
+	.addon-icon {
+		display: grid;
+		place-items: center;
+		width: 60px;
+		height: 60px;
+		border-radius: 14px;
+		background: var(--orange-soft);
+		color: var(--orange-dark);
+	}
+	.addon h3 {
+		font-size: 1.4rem;
+	}
+	.addon-body p {
+		margin: 0;
+		color: var(--muted);
+		max-width: 560px;
+	}
+	.addon-price {
+		display: grid;
+		gap: 10px;
+		justify-items: start;
+		min-width: 240px;
+	}
+	.addon-price .price {
+		margin: 0;
+	}
+	.addon-note {
+		margin: 0;
+		font-size: 0.88rem;
+		color: var(--muted);
+		max-width: 260px;
+	}
 
 	/* Yhteys */
 	.contact {
@@ -872,7 +944,7 @@ const icons: Record<string, string> = {
 		margin: 0;
 	}
 	.footer-logo {
-		height: 40px;
+		height: 56px;
 		width: auto;
 		mix-blend-mode: multiply;
 	}
@@ -943,13 +1015,21 @@ const icons: Record<string, string> = {
 			align-items: flex-start;
 			padding: 28px;
 		}
+		.addon {
+			grid-template-columns: 1fr;
+			gap: 18px;
+			padding: 28px;
+		}
+		.addon-price {
+			min-width: 0;
+		}
 	}
 	@media (max-width: 600px) {
 		.header-inner {
-			height: 64px;
+			height: 72px;
 		}
 		.brand img {
-			height: 36px;
+			height: 48px;
 		}
 		.header-cta {
 			padding: 8px 14px;
