@@ -1,0 +1,85 @@
+---
+// Hero-kuvitus: blueprint-arkki, jossa kypsyysarvio, priorisointimatriisi ja roadmap.
+---
+
+<svg class="hero-visual" viewBox="0 0 520 460" role="img" aria-labelledby="hv-title">
+	<title id="hv-title">Kuvitus: AI Strategy Blueprint -dokumentti, jossa kypsyysarvio, priorisointimatriisi ja 12 kuukauden roadmap</title>
+	<defs>
+		<pattern id="hv-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+			<path d="M20 0 L0 0 0 20" fill="none" stroke="#2f6a8f" stroke-opacity="0.35" stroke-width="0.6"></path>
+		</pattern>
+		<linearGradient id="hv-sheet" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#173a5e"></stop>
+			<stop offset="1" stop-color="#0e2a47"></stop>
+		</linearGradient>
+	</defs>
+
+	<!-- Takimmainen arkki -->
+	<rect x="70" y="10" width="400" height="420" rx="16" fill="#efe7da" stroke="#dcd3c4" transform="rotate(4 270 220)"></rect>
+
+	<!-- Blueprint-arkki -->
+	<rect x="40" y="24" width="420" height="410" rx="16" fill="url(#hv-sheet)"></rect>
+	<rect x="40" y="24" width="420" height="410" rx="16" fill="url(#hv-grid)"></rect>
+
+	<!-- Otsikkorivi -->
+	<text x="66" y="62" fill="#ffffff" font-family="Montserrat, sans-serif" font-weight="800" font-size="16" letter-spacing="1">AI STRATEGY BLUEPRINT</text>
+	<rect x="66" y="72" width="120" height="3" rx="1.5" fill="#c8733a"></rect>
+
+	<!-- Kypsyys -->
+	<text x="66" y="108" fill="#dce8f0" font-family="Inter, sans-serif" font-size="11" font-weight="600">AI-KYPSYYS</text>
+	<g font-family="Inter, sans-serif" font-size="10" fill="#dce8f0">
+		<text x="66" y="130">Data</text>
+		<rect x="132" y="121" width="128" height="10" rx="5" fill="#ffffff" fill-opacity="0.12"></rect>
+		<rect x="132" y="121" width="98" height="10" rx="5" fill="#6fa3c4"></rect>
+		<text x="66" y="152">Osaaminen</text>
+		<rect x="132" y="143" width="128" height="10" rx="5" fill="#ffffff" fill-opacity="0.12"></rect>
+		<rect x="132" y="143" width="62" height="10" rx="5" fill="#6fa3c4"></rect>
+		<text x="66" y="174">Governance</text>
+		<rect x="132" y="165" width="128" height="10" rx="5" fill="#ffffff" fill-opacity="0.12"></rect>
+		<rect x="132" y="165" width="40" height="10" rx="5" fill="#e0925c"></rect>
+		<text x="66" y="196">Käyttö</text>
+		<rect x="132" y="187" width="128" height="10" rx="5" fill="#ffffff" fill-opacity="0.12"></rect>
+		<rect x="132" y="187" width="112" height="10" rx="5" fill="#6fa3c4"></rect>
+	</g>
+
+	<!-- Matriisi -->
+	<text x="296" y="108" fill="#dce8f0" font-family="Inter, sans-serif" font-size="11" font-weight="600">PRIORISOINTI</text>
+	<g transform="translate(296 118)">
+		<rect width="138" height="96" fill="none" stroke="#dce8f0" stroke-opacity="0.5"></rect>
+		<line x1="69" y1="0" x2="69" y2="96" stroke="#dce8f0" stroke-opacity="0.3" stroke-dasharray="3 3"></line>
+		<line x1="0" y1="48" x2="138" y2="48" stroke="#dce8f0" stroke-opacity="0.3" stroke-dasharray="3 3"></line>
+		<rect x="69" y="0" width="69" height="48" fill="#c8733a" fill-opacity="0.18"></rect>
+		<circle cx="100" cy="18" r="7" fill="#e0925c"></circle>
+		<circle cx="118" cy="34" r="5" fill="#e0925c"></circle>
+		<circle cx="84" cy="30" r="4" fill="#e0925c"></circle>
+		<circle cx="40" cy="22" r="5" fill="#6fa3c4"></circle>
+		<circle cx="96" cy="70" r="6" fill="#6fa3c4"></circle>
+		<circle cx="28" cy="74" r="4" fill="#6fa3c4" fill-opacity="0.6"></circle>
+	</g>
+
+	<!-- Roadmap -->
+	<text x="66" y="250" fill="#dce8f0" font-family="Inter, sans-serif" font-size="11" font-weight="600">12 KK ROADMAP</text>
+	<g font-family="Inter, sans-serif" font-size="9" fill="#dce8f0">
+		<line x1="66" y1="272" x2="434" y2="272" stroke="#dce8f0" stroke-opacity="0.35"></line>
+		<text x="66" y="266">Q1</text><text x="158" y="266">Q2</text><text x="250" y="266">Q3</text><text x="342" y="266">Q4</text>
+		<rect x="66" y="284" width="120" height="16" rx="8" fill="#c8733a"></rect>
+		<rect x="140" y="310" width="150" height="16" rx="8" fill="#6fa3c4"></rect>
+		<rect x="240" y="336" width="130" height="16" rx="8" fill="#2f6a8f" stroke="#6fa3c4"></rect>
+		<rect x="320" y="362" width="114" height="16" rx="8" fill="#ffffff" fill-opacity="0.2"></rect>
+	</g>
+
+	<!-- Tarkastusleima -->
+	<g transform="translate(420 400)">
+		<circle r="36" fill="#f7f2ea"></circle>
+		<circle r="30" fill="none" stroke="#a8531d" stroke-width="2" stroke-dasharray="4 3"></circle>
+		<path d="M-12 0 L-3 9 L14 -9" fill="none" stroke="#0e2a47" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+	</g>
+</svg>
+
+<style>
+	.hero-visual {
+		width: 100%;
+		height: auto;
+		filter: drop-shadow(0 24px 40px rgba(14, 42, 71, 0.25));
+	}
+</style>
