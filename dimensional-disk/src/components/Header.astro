@@ -2,6 +2,15 @@
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const home = `${base}/`;
 const contactPage = `${base}/yhteydenotto/`;
+
+const links = [
+	{ href: `${home}#miksi`, label: 'Miksi' },
+	{ href: `${home}#sisalto`, label: 'Sisältö' },
+	{ href: `${home}#prosessi`, label: 'Prosessi' },
+	{ href: `${home}#paketit`, label: 'Paketit' },
+	{ href: `${home}#koulutukset`, label: 'Koulutukset' },
+	{ href: `${base}/meista/`, label: 'Keitä olemme' },
+];
 ---
 
 <header class="site-header">
@@ -9,19 +18,50 @@ const contactPage = `${base}/yhteydenotto/`;
 		<a href={home} class="brand" aria-label="AIvanTO – etusivulle">
 			<img src={`${base}/aivanto-logo.jpg`} alt="AIvanTO" width="3896" height="1088" />
 		</a>
-		<nav aria-label="Päävalikko">
+		<nav id="main-nav" class="main-nav" aria-label="Päävalikko">
 			<ul>
-				<li><a href={`${home}#miksi`}>Miksi</a></li>
-				<li><a href={`${home}#sisalto`}>Sisältö</a></li>
-				<li><a href={`${home}#prosessi`}>Prosessi</a></li>
-				<li><a href={`${home}#paketit`}>Paketit</a></li>
-				<li><a href={`${home}#koulutukset`}>Koulutukset</a></li>
-				<li><a href={`${base}/meista/`}>Keitä olemme</a></li>
+				{links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+				<li class="nav-cta"><a href={contactPage} class="btn btn-primary">Ota yhteyttä</a></li>
 			</ul>
 		</nav>
-		<a href={contactPage} class="btn btn-primary header-cta">Ota yhteyttä</a>
+		<div class="header-actions">
+			<a href={contactPage} class="btn btn-primary header-cta">Ota yhteyttä</a>
+			<button class="menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Avaa valikko">
+				<span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+			</button>
+		</div>
 	</div>
 </header>
+
+<script>
+	// Mobiilivalikko: avaa/sulje painikkeesta, sulkeutuu linkin valinnasta, Escistä ja ulkopuolelle klikatessa.
+	const header = document.querySelector<HTMLElement>('.site-header');
+	const toggle = header?.querySelector<HTMLButtonElement>('.menu-toggle');
+	const nav = header?.querySelector<HTMLElement>('#main-nav');
+
+	if (header && toggle && nav) {
+		const setOpen = (open: boolean) => {
+			header.classList.toggle('menu-open', open);
+			toggle.setAttribute('aria-expanded', String(open));
+			toggle.setAttribute('aria-label', open ? 'Sulje valikko' : 'Avaa valikko');
+		};
+
+		toggle.addEventListener('click', () => setOpen(!header.classList.contains('menu-open')));
+		nav.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && header.classList.contains('menu-open')) {
+				setOpen(false);
+				toggle.focus();
+			}
+		});
+		document.addEventListener('click', (e) => {
+			if (header.classList.contains('menu-open') && !header.contains(e.target as Node)) setOpen(false);
+		});
+		window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => {
+			if (e.matches) setOpen(false);
+		});
+	}
+</script>
 
 <style>
 	.site-header {
@@ -44,14 +84,14 @@ const contactPage = `${base}/yhteydenotto/`;
 		width: auto;
 		mix-blend-mode: multiply; /* logon kermanvärinen tausta sulautuu sivun taustaan */
 	}
-	nav ul {
+	.main-nav ul {
 		display: flex;
 		gap: 32px;
 		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
-	nav a {
+	.main-nav a:not(.btn) {
 		color: var(--navy);
 		text-decoration: none;
 		font-family: var(--font-head);
@@ -60,16 +100,117 @@ const contactPage = `${base}/yhteydenotto/`;
 		padding: 6px 0;
 		border-bottom: 2px solid transparent;
 	}
-	nav a:hover {
+	.main-nav a:not(.btn):hover {
 		border-bottom-color: var(--orange);
+	}
+	.nav-cta {
+		display: none;
+	}
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 12px;
 	}
 	.header-cta {
 		padding: 10px 20px;
 		font-size: 0.9rem;
 	}
+	.menu-toggle {
+		display: none;
+		place-items: center;
+		width: 46px;
+		height: 46px;
+		padding: 0;
+		border: 2px solid var(--navy);
+		border-radius: 12px;
+		background: transparent;
+		color: var(--navy);
+		cursor: pointer;
+	}
+	.menu-toggle:focus-visible {
+		outline: 3px solid var(--orange);
+		outline-offset: 3px;
+	}
+	.bars {
+		position: relative;
+		display: block;
+		width: 20px;
+		height: 14px;
+	}
+	.bars span {
+		position: absolute;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		border-radius: 2px;
+		background: currentColor;
+		transition: transform 0.2s ease, opacity 0.2s ease, top 0.2s ease;
+	}
+	.bars span:nth-child(1) {
+		top: 0;
+	}
+	.bars span:nth-child(2) {
+		top: 6px;
+	}
+	.bars span:nth-child(3) {
+		top: 12px;
+	}
+	.menu-open .bars span:nth-child(1) {
+		top: 6px;
+		transform: rotate(45deg);
+	}
+	.menu-open .bars span:nth-child(2) {
+		opacity: 0;
+	}
+	.menu-open .bars span:nth-child(3) {
+		top: 6px;
+		transform: rotate(-45deg);
+	}
+
 	@media (max-width: 900px) {
-		nav {
-			display: none;
+		.menu-toggle {
+			display: grid;
+		}
+		/* Alasvetovalikko yläpalkin alle */
+		.main-nav {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			background: var(--cream);
+			border-bottom: 1px solid var(--line);
+			box-shadow: 0 18px 30px -18px rgba(14, 42, 71, 0.35);
+			max-height: calc(100vh - 100%);
+			overflow-y: auto;
+			visibility: hidden;
+			opacity: 0;
+			transform: translateY(-8px);
+			transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+		}
+		.menu-open .main-nav {
+			visibility: visible;
+			opacity: 1;
+			transform: none;
+			transition: opacity 0.2s ease, transform 0.2s ease;
+		}
+		.main-nav ul {
+			flex-direction: column;
+			gap: 0;
+			max-width: var(--max);
+			margin: 0 auto;
+			padding: 8px 24px 20px;
+		}
+		.main-nav li {
+			border-bottom: 1px solid var(--line);
+		}
+		.main-nav a:not(.btn) {
+			display: block;
+			padding: 14px 0;
+			font-size: 1.05rem;
+			border-bottom: 0;
+		}
+		.main-nav a:not(.btn):hover {
+			color: var(--orange-dark);
 		}
 	}
 	@media (max-width: 600px) {
@@ -82,6 +223,24 @@ const contactPage = `${base}/yhteydenotto/`;
 		.header-cta {
 			padding: 8px 14px;
 			font-size: 0.82rem;
+		}
+		.main-nav ul {
+			padding: 4px 16px 20px;
+		}
+	}
+	/* Kapeimmilla näytöillä yhteydenottopainike siirtyy valikon sisään */
+	@media (max-width: 480px) {
+		.header-cta {
+			display: none;
+		}
+		.nav-cta {
+			display: block;
+			border-bottom: 0 !important;
+			padding-top: 16px;
+		}
+		.nav-cta .btn {
+			display: flex;
+			justify-content: center;
 		}
 	}
 </style>
