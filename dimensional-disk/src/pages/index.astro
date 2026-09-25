@@ -2,16 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 import Crack from '../components/Crack.astro';
 import HeroVisual from '../components/HeroVisual.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const logoSrc = `${base}/aivanto-logo.jpg`;
+const contactPage = `${base}/yhteydenotto/`;
 
 const contact = {
-	email: 'marko.maatta@aivanto.fi',
 	phone: '044 592 3414',
 	phoneHref: '+358445923414',
 	company: 'AIvanTO Oy',
-	businessId: '3610409-8',
 };
 
 const gaps = [
@@ -93,23 +93,7 @@ const icons: Record<string, string> = {
 	title="AI Strategy Blueprint | AIvanTO Oy"
 	description="AI Strategy Blueprint – valmis tekoälystrategian pohja nopeasti ja hallitusti. Kypsyysanalyysi, priorisoidut käyttötapaukset, governance ja 12 kuukauden roadmap."
 >
-	<header class="site-header">
-		<div class="container header-inner">
-			<a href="#top" class="brand" aria-label="AIvanTO – etusivulle">
-				<img src={logoSrc} alt="AIvanTO" width="3896" height="1088" />
-			</a>
-			<nav aria-label="Päävalikko">
-				<ul>
-					<li><a href="#miksi">Miksi</a></li>
-					<li><a href="#sisalto">Sisältö</a></li>
-					<li><a href="#prosessi">Prosessi</a></li>
-					<li><a href="#paketit">Paketit</a></li>
-					<li><a href="#koulutukset">Koulutukset</a></li>
-				</ul>
-			</nav>
-			<a href="#yhteys" class="btn btn-primary header-cta">Ota yhteyttä</a>
-		</div>
-	</header>
+	<Header />
 
 	<main id="top">
 		<!-- HERO -->
@@ -312,7 +296,7 @@ const icons: Record<string, string> = {
 									{p.features.map((f) => <li>{f}</li>)}
 								</ul>
 								<a
-									href={`mailto:${contact.email}?subject=${encodeURIComponent('AI Strategy Blueprint – ' + p.name)}`}
+									href={contactPage}
 									class:list={['btn', p.featured ? 'btn-primary' : 'btn-secondary']}
 								>
 									Kysy lisää
@@ -331,7 +315,7 @@ const icons: Record<string, string> = {
 							priorisoinnin ja seuraavien investointien pohjaksi.
 						</p>
 					</div>
-					<a href="#yhteys" class="btn btn-light">Varaa keskustelu</a>
+					<a href={contactPage} class="btn btn-light">Varaa keskustelu</a>
 				</aside>
 
 				<aside id="koulutukset" class="addon">
@@ -352,7 +336,7 @@ const icons: Record<string, string> = {
 						<p class="price"><span class="from">alkaen</span>1 200 €</p>
 						<p class="addon-note">alv 0 %, hinta riippuu koulutuksen laajuudesta ja sisällöstä</p>
 						<a
-							href={`mailto:${contact.email}?subject=${encodeURIComponent('AI Strategy Blueprint – Koulutukset')}`}
+							href={contactPage}
 							class="btn btn-secondary"
 						>
 							Kysy koulutuksista
@@ -374,76 +358,24 @@ const icons: Record<string, string> = {
 				</div>
 				<div class="contact-card">
 					<p class="contact-name">Marko Määttä<span>{contact.company}</span></p>
-					<a class="contact-line" href={`mailto:${contact.email}`}>
+					<a class="contact-line" href={contactPage}>
 						<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"></path></svg>
-						{contact.email}
+						Yhteydenottolomake
 					</a>
 					<a class="contact-line" href={`tel:${contact.phoneHref}`}>
 						<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"></path></svg>
 						{contact.phone}
 					</a>
-					<a href={`mailto:${contact.email}?subject=${encodeURIComponent('AI Strategy Blueprint')}`} class="btn btn-primary">Lähetä viesti</a>
+					<a href={contactPage} class="btn btn-primary">Lähetä viesti</a>
 				</div>
 			</div>
 		</section>
 	</main>
 
-	<footer class="site-footer">
-		<Crack />
-		<div class="container footer-inner">
-			<img src={logoSrc} alt="AIvanTO" class="footer-logo" width="3896" height="1088" loading="lazy" />
-			<p>{contact.company} • Y-tunnus {contact.businessId}</p>
-			<p>© {new Date().getFullYear()} {contact.company}</p>
-		</div>
-	</footer>
+	<Footer />
 </Layout>
 
 <style>
-	/* Header */
-	.site-header {
-		position: sticky;
-		top: 0;
-		z-index: 50;
-		background: rgba(247, 242, 234, 0.94);
-		backdrop-filter: blur(8px);
-		border-bottom: 1px solid var(--line);
-	}
-	.header-inner {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 24px;
-		height: 96px;
-	}
-	.brand img {
-		height: 68px;
-		width: auto;
-		mix-blend-mode: multiply; /* logon kermanvärinen tausta sulautuu sivun taustaan */
-	}
-	nav ul {
-		display: flex;
-		gap: 32px;
-		list-style: none;
-		margin: 0;
-		padding: 0;
-	}
-	nav a {
-		color: var(--navy);
-		text-decoration: none;
-		font-family: var(--font-head);
-		font-weight: 600;
-		font-size: 0.95rem;
-		padding: 6px 0;
-		border-bottom: 2px solid transparent;
-	}
-	nav a:hover {
-		border-bottom-color: var(--orange);
-	}
-	.header-cta {
-		padding: 10px 20px;
-		font-size: 0.9rem;
-	}
-
 	/* Hero */
 	.hero {
 		position: relative;
@@ -926,29 +858,6 @@ const icons: Record<string, string> = {
 		margin-top: 8px;
 	}
 
-	/* Footer */
-	.site-footer {
-		background: var(--cream);
-		padding: 24px 0 40px;
-	}
-	.footer-inner {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		flex-wrap: wrap;
-		gap: 16px;
-		color: var(--muted);
-		font-size: 0.92rem;
-	}
-	.footer-inner p {
-		margin: 0;
-	}
-	.footer-logo {
-		height: 56px;
-		width: auto;
-		mix-blend-mode: multiply;
-	}
-
 	/* Responsiivisuus */
 	.hero-grid > *,
 	.split > *,
@@ -967,9 +876,6 @@ const icons: Record<string, string> = {
 		}
 	}
 	@media (max-width: 900px) {
-		nav {
-			display: none;
-		}
 		.hero-grid,
 		.split,
 		.two-col,
@@ -1025,16 +931,6 @@ const icons: Record<string, string> = {
 		}
 	}
 	@media (max-width: 600px) {
-		.header-inner {
-			height: 72px;
-		}
-		.brand img {
-			height: 48px;
-		}
-		.header-cta {
-			padding: 8px 14px;
-			font-size: 0.82rem;
-		}
 		.hero {
 			padding-top: 44px;
 		}

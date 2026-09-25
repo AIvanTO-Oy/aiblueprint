@@ -1,0 +1,86 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const home = `${base}/`;
+const contactPage = `${base}/yhteydenotto/`;
+---
+
+<header class="site-header">
+	<div class="container header-inner">
+		<a href={home} class="brand" aria-label="AIvanTO – etusivulle">
+			<img src={`${base}/aivanto-logo.jpg`} alt="AIvanTO" width="3896" height="1088" />
+		</a>
+		<nav aria-label="Päävalikko">
+			<ul>
+				<li><a href={`${home}#miksi`}>Miksi</a></li>
+				<li><a href={`${home}#sisalto`}>Sisältö</a></li>
+				<li><a href={`${home}#prosessi`}>Prosessi</a></li>
+				<li><a href={`${home}#paketit`}>Paketit</a></li>
+				<li><a href={`${home}#koulutukset`}>Koulutukset</a></li>
+			</ul>
+		</nav>
+		<a href={contactPage} class="btn btn-primary header-cta">Ota yhteyttä</a>
+	</div>
+</header>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		background: rgba(247, 242, 234, 0.94);
+		backdrop-filter: blur(8px);
+		border-bottom: 1px solid var(--line);
+	}
+	.header-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+		height: 96px;
+	}
+	.brand img {
+		height: 68px;
+		width: auto;
+		mix-blend-mode: multiply; /* logon kermanvärinen tausta sulautuu sivun taustaan */
+	}
+	nav ul {
+		display: flex;
+		gap: 32px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	nav a {
+		color: var(--navy);
+		text-decoration: none;
+		font-family: var(--font-head);
+		font-weight: 600;
+		font-size: 0.95rem;
+		padding: 6px 0;
+		border-bottom: 2px solid transparent;
+	}
+	nav a:hover {
+		border-bottom-color: var(--orange);
+	}
+	.header-cta {
+		padding: 10px 20px;
+		font-size: 0.9rem;
+	}
+	@media (max-width: 900px) {
+		nav {
+			display: none;
+		}
+	}
+	@media (max-width: 600px) {
+		.header-inner {
+			height: 72px;
+		}
+		.brand img {
+			height: 48px;
+		}
+		.header-cta {
+			padding: 8px 14px;
+			font-size: 0.82rem;
+		}
+	}
+</style>
