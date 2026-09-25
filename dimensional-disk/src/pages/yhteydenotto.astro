@@ -7,10 +7,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const formUrl =
 	'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=ZZIEfFlONEqw1ZdaDy-jybmXyPQC58dNivWb--XntDBURUxBSURLMEdXSkZKS0o5U1pJU1IyTTNXTyQlQCN0PWcu';
 
-const contact = {
-	phone: '044 592 3414',
-	phoneHref: '+358445923414',
-};
+const contacts = [
+	{ name: 'Marko Määttä', phone: '044 592 3414', phoneHref: '+358445923414' },
+	{ name: 'Marko Luukkanen', phone: '040 415 9198', phoneHref: '+358404159198' },
+];
 ---
 
 <Layout
@@ -39,18 +39,26 @@ const contact = {
 						title="Yhteydenottolomake"
 						allowfullscreen></iframe>
 					<p class="form-fallback">
-						Eikö lomake näy? <a href={formUrl} target="_blank" rel="noopener">Avaa lomake uuteen ikkunaan</a>.
-						Lue, miten käsittelemme tietojasi: <a href={`${base}/tietosuoja/`}>tietosuojaseloste</a>.
+						Eikö lomake näy? <a href={formUrl} target="_blank" rel="noopener">Avaa lomake uuteen ikkunaan</a>.<br />
+						Lue, miten käsittelemme tietojasi: <a href={`${base}/tietosuoja/`}>Tietosuojaseloste</a>.
 					</p>
 				</div>
 
 				<aside class="side-card">
 					<h2>Soita suoraan</h2>
-					<p class="contact-name">Marko Määttä<span>AIvanTO Oy</span></p>
-					<a class="contact-line" href={`tel:${contact.phoneHref}`}>
-						<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"></path></svg>
-						{contact.phone}
-					</a>
+					{
+						contacts.map((c) => (
+							<div class="contact-person">
+								<p class="contact-name">{c.name}</p>
+								<a class="contact-line" href={`tel:${c.phoneHref}`}>
+									<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+										<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z" />
+									</svg>
+									{c.phone}
+								</a>
+							</div>
+						))
+					}
 					<hr />
 					<h3>Mitä tapahtuu seuraavaksi?</h3>
 					<ol class="next-steps">
@@ -135,20 +143,15 @@ const contact = {
 	.side-card h2 {
 		font-size: 1.3rem;
 	}
+	.contact-person + .contact-person {
+		margin-top: 20px;
+	}
 	.contact-name {
 		font-family: var(--font-head);
 		font-weight: 800;
 		font-size: 1.15rem;
 		color: var(--navy);
-		margin: 0 0 12px;
-		display: flex;
-		flex-direction: column;
-	}
-	.contact-name span {
-		font-family: var(--font-body);
-		font-weight: 500;
-		font-size: 0.95rem;
-		color: var(--muted);
+		margin: 0 0 6px;
 	}
 	.contact-line {
 		display: flex;

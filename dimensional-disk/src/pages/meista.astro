@@ -1,0 +1,260 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const contactPage = `${base}/yhteydenotto/`;
+
+// Placeholder-sisältö: korvaa rooli, kuvaus, osaamisalueet ja kuva, kun tiedot ovat valmiina.
+// Kuvan voi lisätä public-kansioon ja asettaa polun kenttään photo, esim. '/tiimi/marko-maatta.jpg'.
+const team = [
+	{
+		name: 'Marko Määttä',
+		initials: 'MM',
+		role: '[Rooli / titteli]',
+		bio: '[Lyhyt esittely: tausta, kokemus ja mitä tuo asiakkaalle. 2–4 lausetta.]',
+		skills: ['[Osaamisalue 1]', '[Osaamisalue 2]', '[Osaamisalue 3]'],
+		photo: '',
+		linkedin: '',
+	},
+	{
+		name: 'Marko Luukkanen',
+		initials: 'ML',
+		role: '[Rooli / titteli]',
+		bio: '[Lyhyt esittely: tausta, kokemus ja mitä tuo asiakkaalle. 2–4 lausetta.]',
+		skills: ['[Osaamisalue 1]', '[Osaamisalue 2]', '[Osaamisalue 3]'],
+		photo: '',
+		linkedin: '',
+	},
+];
+---
+
+<Layout
+	title="Keitä me olemme | AIvanTO Oy"
+	description="Tutustu AIvanTOn asiantuntijoihin AI Strategy Blueprint -palvelun takana."
+>
+	<Header />
+
+	<main>
+		<section class="page-hero">
+			<div class="container">
+				<a href={`${base}/`} class="back">← Takaisin etusivulle</a>
+				<span class="eyebrow eyebrow-light">AIvanTO Oy</span>
+				<h1>Keitä me olemme</h1>
+				<p class="lead-light">
+					[Lyhyt esittely AIvanTOsta: kuka olemme, mihin keskitymme ja miksi asiakkaat valitsevat meidät.]
+				</p>
+			</div>
+		</section>
+
+		<section class="team-section">
+			<div class="container team-grid">
+				{
+					team.map((p) => (
+						<article class="person">
+							<div class="photo">
+								{p.photo ? (
+									<img src={`${base}${p.photo}`} alt={p.name} loading="lazy" />
+								) : (
+									<span class="initials" aria-hidden="true">{p.initials}</span>
+								)}
+							</div>
+							<div class="person-body">
+								<h2>{p.name}</h2>
+								<p class="role">{p.role}</p>
+								<p class="bio">{p.bio}</p>
+								<ul class="skills">
+									{p.skills.map((s) => <li>{s}</li>)}
+								</ul>
+								{p.linkedin && (
+									<a class="linkedin" href={p.linkedin} target="_blank" rel="noopener">
+										LinkedIn-profiili →
+									</a>
+								)}
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="cta-section">
+			<div class="container">
+				<div class="cta">
+					<div>
+						<h2>Kiinnostuitko?</h2>
+						<p>Kerro organisaatiosi tilanteesta, niin ehdotamme sopivan paketin ja aikataulun.</p>
+					</div>
+					<a href={contactPage} class="btn btn-primary">Ota yhteyttä <span aria-hidden="true">→</span></a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+	.page-hero {
+		background: var(--navy);
+		color: #e8eff5;
+		padding: 56px 0 120px;
+	}
+	.page-hero h1 {
+		color: var(--white);
+		font-size: clamp(2rem, 4.5vw, 3rem);
+		font-weight: 800;
+	}
+	.eyebrow-light {
+		color: #f0b286;
+	}
+	.back {
+		display: table;
+		color: #e8eff5;
+		text-decoration: none;
+		font-weight: 600;
+		font-size: 0.95rem;
+		margin-bottom: 28px;
+	}
+	.back:hover {
+		color: #f0b286;
+	}
+	.lead-light {
+		font-size: 1.15rem;
+		max-width: 680px;
+		margin: 0;
+	}
+	.team-section {
+		margin-top: -72px;
+		padding-bottom: 72px;
+	}
+	.team-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 24px;
+	}
+	.person {
+		background: var(--white);
+		border-radius: var(--radius);
+		box-shadow: var(--shadow);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+	.photo {
+		aspect-ratio: 16 / 10;
+		display: grid;
+		place-items: center;
+		background:
+			linear-gradient(135deg, rgba(47, 106, 143, 0.18), rgba(200, 115, 58, 0.18)),
+			var(--cream-2);
+		border-bottom: 4px solid var(--orange);
+	}
+	.photo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.initials {
+		display: grid;
+		place-items: center;
+		width: 132px;
+		height: 132px;
+		border-radius: 50%;
+		background: var(--navy);
+		color: var(--white);
+		font-family: var(--font-head);
+		font-weight: 800;
+		font-size: 2.6rem;
+		letter-spacing: 0.04em;
+		box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.7);
+	}
+	.person-body {
+		padding: 32px 36px 36px;
+	}
+	.person h2 {
+		font-size: 1.5rem;
+		margin-bottom: 4px;
+	}
+	.role {
+		font-family: var(--font-head);
+		font-weight: 700;
+		color: var(--orange-dark);
+		margin-bottom: 16px;
+	}
+	.bio {
+		color: var(--muted);
+	}
+	.skills {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+	.skills li {
+		font-size: 0.88rem;
+		font-weight: 600;
+		color: var(--navy);
+		background: var(--blue-soft);
+		padding: 5px 12px;
+		border-radius: 999px;
+	}
+	.linkedin {
+		display: inline-block;
+		margin-top: 20px;
+		font-weight: 600;
+	}
+	.cta-section {
+		padding-bottom: 96px;
+	}
+	.cta {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 32px;
+		background: linear-gradient(120deg, var(--navy), var(--navy-2) 60%, var(--blue));
+		color: #e8eff5;
+		border-radius: var(--radius);
+		padding: 40px;
+		box-shadow: var(--shadow);
+	}
+	.cta h2 {
+		color: var(--white);
+		font-size: 1.6rem;
+	}
+	.cta p {
+		margin: 0;
+	}
+	.cta .btn {
+		flex: none;
+	}
+	@media (max-width: 900px) {
+		.team-grid {
+			grid-template-columns: 1fr;
+		}
+		.cta {
+			flex-direction: column;
+			align-items: flex-start;
+			padding: 28px;
+		}
+	}
+	@media (max-width: 600px) {
+		.page-hero {
+			padding: 40px 0 96px;
+		}
+		.person-body {
+			padding: 24px;
+		}
+		.initials {
+			width: 104px;
+			height: 104px;
+			font-size: 2rem;
+		}
+		.cta-section {
+			padding-bottom: 64px;
+		}
+	}
+</style>
