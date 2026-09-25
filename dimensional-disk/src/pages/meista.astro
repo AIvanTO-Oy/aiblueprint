@@ -6,25 +6,36 @@ import Footer from '../components/Footer.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const contactPage = `${base}/yhteydenotto/`;
 
-// Placeholder-sisältö: korvaa rooli, kuvaus, osaamisalueet ja kuva, kun tiedot ovat valmiina.
-// Kuvan voi lisätä public-kansioon ja asettaa polun kenttään photo, esim. '/tiimi/marko-maatta.jpg'.
+// Kuvat ovat kansiossa public/tiimi/. LinkedIn-linkki näkyy kortissa, kun kenttä täytetään.
 const team = [
-	{
-		name: 'Marko Määttä',
-		initials: 'MM',
-		role: '[Rooli / titteli]',
-		bio: '[Lyhyt esittely: tausta, kokemus ja mitä tuo asiakkaalle. 2–4 lausetta.]',
-		skills: ['[Osaamisalue 1]', '[Osaamisalue 2]', '[Osaamisalue 3]'],
-		photo: '',
-		linkedin: '',
-	},
 	{
 		name: 'Marko Luukkanen',
 		initials: 'ML',
-		role: '[Rooli / titteli]',
-		bio: '[Lyhyt esittely: tausta, kokemus ja mitä tuo asiakkaalle. 2–4 lausetta.]',
-		skills: ['[Osaamisalue 1]', '[Osaamisalue 2]', '[Osaamisalue 3]'],
-		photo: '',
+		role: 'CEO',
+		bio: 'Marko Luukkanen auttaa yrityksiä tunnistamaan, missä tekoälystä syntyy eniten arvoa liiketoiminnalle. Vuosien kokemus liiketoiminnan kehittämisestä, teknologiaratkaisujen hyödyntämisestä ja asiakastyöstä auttaa löytämään käytännölliset keinot tehostaa toimintaa ja luoda uusia kasvumahdollisuuksia. Marko yhdistää strategisen näkemyksen ja konkreettisen tekemisen, jotta ideat muuttuvat mitattaviksi tuloksiksi.',
+		skills: [
+			'AI-strategiat ja liiketoiminnan kehittäminen',
+			'Digitaalinen transformaatio ja muutosjohtaminen',
+			'Tekoälyn liiketoimintahyötyjen tunnistaminen',
+		],
+		phone: '040 415 9198',
+		phoneHref: '+358404159198',
+		photo: '/tiimi/marko-luukkanen.jpg',
+		linkedin: '',
+	},
+	{
+		name: 'Marko Määttä',
+		initials: 'MM',
+		role: 'CTO',
+		bio: 'Marko Määttä on teknologian, automaation ja tekoälyratkaisujen asiantuntija, joka nauttii monimutkaisten haasteiden ratkaisemisesta. Hänellä on laaja kokemus Microsoft-teknologioista sekä liiketoimintaa tukevien ratkaisujen suunnittelusta ja toteutuksesta. Markon vahvuus on rakentaa ratkaisuja, jotka eivät ainoastaan toimi teknisesti, vaan tuottavat asiakkaalle aidosti tehokkaampia toimintatapoja ja parempia tuloksia.',
+		skills: [
+			'Microsoft 365- ja Copilot-ratkaisut',
+			'Automaatio ja prosessien tehostaminen',
+			'Tekoälyratkaisujen suunnittelu ja toteutus',
+		],
+		phone: '044 592 3414',
+		phoneHref: '+358445923414',
+		photo: '/tiimi/marko-maatta.jpg',
 		linkedin: '',
 	},
 ];
@@ -43,7 +54,8 @@ const team = [
 				<span class="eyebrow eyebrow-light">AIvanTO Oy</span>
 				<h1>Keitä me olemme</h1>
 				<p class="lead-light">
-					[Lyhyt esittely AIvanTOsta: kuka olemme, mihin keskitymme ja miksi asiakkaat valitsevat meidät.]
+					AIvanTO Oy tuo tekoälyn osaksi yrityksesi arkea. Suunnittelemme ja toteutamme ratkaisuja, jotka säästävät
+					aikaa, tukevat päätöksentekoa ja vauhdittavat kasvua.
 				</p>
 			</div>
 		</section>
@@ -55,7 +67,7 @@ const team = [
 						<article class="person">
 							<div class="photo">
 								{p.photo ? (
-									<img src={`${base}${p.photo}`} alt={p.name} loading="lazy" />
+									<img src={`${base}${p.photo}`} alt={`${p.name}, ${p.role}`} loading="lazy" />
 								) : (
 									<span class="initials" aria-hidden="true">{p.initials}</span>
 								)}
@@ -64,9 +76,18 @@ const team = [
 								<h2>{p.name}</h2>
 								<p class="role">{p.role}</p>
 								<p class="bio">{p.bio}</p>
+								<h3 class="skills-title">Osaamisalueet</h3>
 								<ul class="skills">
 									{p.skills.map((s) => <li>{s}</li>)}
 								</ul>
+								<div class="person-contact">
+									<a href={`tel:${p.phoneHref}`}>
+										<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+											<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z" />
+										</svg>
+										{p.phone}
+									</a>
+								</div>
 								{p.linkedin && (
 									<a class="linkedin" href={p.linkedin} target="_blank" rel="noopener">
 										LinkedIn-profiili →
@@ -76,6 +97,14 @@ const team = [
 						</article>
 					))
 				}
+			</div>
+			<div class="container">
+				<p class="email-format">
+					<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+						<path d="M4 6h16v12H4zM4 7l8 6 8-6"></path>
+					</svg>
+					<span>Sähköpostiosoitteemme ovat muotoa <strong>etunimi.sukunimi&#64;aivanto.fi</strong></span>
+				</p>
 			</div>
 		</section>
 
@@ -143,7 +172,8 @@ const team = [
 		flex-direction: column;
 	}
 	.photo {
-		aspect-ratio: 16 / 10;
+		aspect-ratio: 4 / 3;
+		overflow: hidden;
 		display: grid;
 		place-items: center;
 		background:
@@ -155,6 +185,7 @@ const team = [
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		object-position: center 25%; /* pystykuva: kasvot ja hartiat näkyviin */
 	}
 	.initials {
 		display: grid;
@@ -201,6 +232,57 @@ const team = [
 		background: var(--blue-soft);
 		padding: 5px 12px;
 		border-radius: 999px;
+	}
+	.person-body {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+	.skills-title {
+		font-size: 0.8rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--muted);
+		margin: 8px 0 10px;
+	}
+	.person-contact {
+		margin-top: auto;
+		padding-top: 24px;
+	}
+	.person-contact a {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		color: var(--navy);
+		font-weight: 600;
+		text-decoration: none;
+		border-top: 1px solid var(--line);
+		padding-top: 18px;
+		width: 100%;
+	}
+	.person-contact a:hover {
+		color: var(--orange-dark);
+	}
+	.person-contact svg {
+		color: var(--blue);
+		flex: none;
+	}
+	.email-format {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		margin: 28px 0 0;
+		color: var(--muted);
+		text-align: center;
+		flex-wrap: wrap;
+	}
+	.email-format svg {
+		color: var(--blue);
+		flex: none;
+	}
+	.email-format strong {
+		color: var(--navy);
 	}
 	.linkedin {
 		display: inline-block;
