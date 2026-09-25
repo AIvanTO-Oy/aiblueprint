@@ -11,6 +11,7 @@ const businessId = '3610409-8';
 	<div class="container footer-inner">
 		<img src={`${base}/aivanto-logo.jpg`} alt="AIvanTO" class="footer-logo" width="3896" height="1088" loading="lazy" />
 		<p>{company} • Y-tunnus {businessId}</p>
+		<p><a href={`${base}/tietosuoja/`}>Tietosuojaseloste</a></p>
 		<p>© {new Date().getFullYear()} {company}</p>
 	</div>
 </footer>
@@ -31,6 +32,13 @@ const businessId = '3610409-8';
 	}
 	.footer-inner p {
 		margin: 0;
+	}
+	.footer-inner a {
+		color: var(--navy);
+		font-weight: 600;
+	}
+	.footer-inner a:hover {
+		color: var(--orange-dark);
 	}
 	.footer-logo {
 		height: 56px;

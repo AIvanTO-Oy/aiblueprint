@@ -1,0 +1,229 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const contactPage = `${base}/yhteydenotto/`;
+const updated = '25.9.2026';
+
+const controller = {
+	company: 'AIvanTO Oy',
+	businessId: '3610409-8',
+	email: 'aivantooy@aivanto.fi',
+};
+---
+
+<Layout
+	title="Tietosuojaseloste | AIvanTO Oy"
+	description="AIvanTO Oy:n tietosuojaseloste: miten yhteydenottolomakkeella kerättyjä henkilötietoja käsitellään."
+>
+	<Header />
+
+	<main>
+		<section class="page-hero">
+			<div class="container">
+				<a href={`${base}/`} class="back">← Takaisin etusivulle</a>
+				<span class="eyebrow eyebrow-light">Tietosuoja</span>
+				<h1>Tietosuojaseloste</h1>
+				<p class="lead-light">
+					EU:n yleisen tietosuoja-asetuksen (2016/679) mukainen seloste. Päivitetty {updated}.
+				</p>
+			</div>
+		</section>
+
+		<section class="policy-section">
+			<div class="container">
+				<article class="policy">
+					<h2>1. Rekisterinpitäjä ja yhteystiedot</h2>
+					<dl class="facts">
+						<dt>Rekisterinpitäjä</dt>
+						<dd>{controller.company}</dd>
+						<dt>Y-tunnus</dt>
+						<dd>{controller.businessId}</dd>
+						<dt>Sähköposti</dt>
+						<dd>{controller.email}</dd>
+					</dl>
+
+					<h2>2. Mitä tietoja käsittelemme ja mihin niitä käytetään</h2>
+					<p>Käsittelemme tietoja, jotka annat verkkosivuston yhteydenottolomakkeella:</p>
+					<ul>
+						<li>nimi</li>
+						<li>organisaatio ja asema</li>
+						<li>yhteystiedot, kuten sähköpostiosoite ja puhelinnumero</li>
+						<li>viestin sisältö ja muut lomakkeelle itse antamasi tiedot</li>
+					</ul>
+					<p>Tietoja käytetään ainoastaan:</p>
+					<ul>
+						<li>yhteydenottoosi vastaamiseen</li>
+						<li>palveluistamme kertomiseen ja tarjouksen laatimiseen pyynnöstäsi</li>
+						<li>mahdollisen asiakassuhteen aloittamiseen</li>
+					</ul>
+					<p>Emme käytä tietoja suoramarkkinointiin ilman erillistä suostumustasi emmekä luovuta niitä kolmansille osapuolille markkinointitarkoituksiin.</p>
+
+					<h2>3. Käsittelyn peruste</h2>
+					<p>Henkilötietojen käsittely perustuu:</p>
+					<ul>
+						<li>
+							<strong>rekisterinpitäjän oikeutettuun etuun</strong> (tietosuoja-asetuksen 6 artiklan 1 kohdan f
+							alakohta): vastaamme itse lähettämääsi yhteydenottoon
+						</li>
+						<li>
+							<strong>sopimusta edeltäviin toimenpiteisiin</strong> (6 artiklan 1 kohdan b alakohta), kun pyydät
+							tarjousta tai lisätietoja palvelusta
+						</li>
+					</ul>
+
+					<h2>4. Säilytysaika</h2>
+					<p>
+						Säilytämme yhteydenottotietoja vain niin kauan kuin se on tarpeen yhteydenottoon vastaamiseksi ja
+						mahdollisen asiakassuhteen hoitamiseksi, kuitenkin enintään 24 kuukautta viimeisestä yhteydenotosta. Jos yhteydenotosta syntyy
+						asiakassuhde, tietoja käsitellään asiakassuhteen ja kirjanpitolain edellyttämän ajan.
+					</p>
+
+					<h2>5. Tietojen tallennus ja käsittelijät</h2>
+					<p>
+						Yhteydenottolomake on toteutettu Microsoft Forms -palvelulla. Lomakkeelle antamasi tiedot tallentuvat {controller.company}:n Microsoft 365 -ympäristöön. Microsoft toimii henkilötietojen käsittelijänä
+						Microsoftin tietosuojaehtojen mukaisesti. {controller.company}:n Microsoft 365 -ympäristö ja siihen
+						tallennetut tiedot sijaitsevat EU:n alueella.
+					</p>
+					<p>Tietoihin on pääsy vain niillä {controller.company}:n henkilöillä, jotka tarvitsevat niitä yhteydenottoon vastaamiseksi.</p>
+
+					<h3>Verkkosivuston tekninen toteutus</h3>
+					<p>
+						Sivusto toimii GitHub Pages -palvelussa (GitHub Inc.). Palvelu voi tallentaa teknisiä lokitietoja, kuten
+						IP-osoitteen, tietoturvan ylläpitämiseksi. Sivusto ei käytä evästeitä eikä kävijäseurantaa.
+					</p>
+
+					<h2>6. Tietojen siirto EU:n ja ETA:n ulkopuolelle</h2>
+					<p>
+						Pyrimme käsittelemään tietoja EU:n ja ETA:n alueella. Jos palveluntarjoaja käsittelee tietoja EU:n tai
+						ETA:n ulkopuolella, siirrot tehdään tietosuoja-asetuksen edellyttämin suojatoimin, kuten EU–US Data
+						Privacy Frameworkin tai Euroopan komission vakiosopimuslausekkeiden perusteella.
+					</p>
+
+					<h2>7. Rekisteröidyn oikeudet</h2>
+					<p>Sinulla on oikeus:</p>
+					<ul>
+						<li><strong>saada pääsy tietoihisi:</strong> voit pyytää tiedon siitä, mitä tietoja sinusta käsittelemme</li>
+						<li><strong>tietojen oikaisuun:</strong> voit pyytää korjaamaan virheelliset tai puutteelliset tiedot</li>
+						<li><strong>tietojen poistoon:</strong> voit pyytää poistamaan tietosi, ellei niiden säilyttämiselle ole lakisääteistä perustetta</li>
+						<li><strong>vastustaa käsittelyä ja rajoittaa sitä</strong> tietosuoja-asetuksessa säädetyin edellytyksin</li>
+						<li>
+							<strong>tehdä valitus valvontaviranomaiselle:</strong> jos katsot, että tietojasi käsitellään
+							tietosuoja-asetuksen vastaisesti, voit tehdä valituksen tietosuojavaltuutetun toimistolle
+							(<a href="https://tietosuoja.fi" target="_blank" rel="noopener">tietosuoja.fi</a>).
+						</li>
+					</ul>
+					<p>
+						Voit käyttää oikeuksiasi ottamalla yhteyttä <a href={contactPage}>yhteydenottolomakkeella</a>.
+						Vastaamme pyyntöihin viimeistään kuukauden kuluessa.
+					</p>
+
+					<h2>8. Tietoturva</h2>
+					<p>
+						Tiedot säilytetään Microsoft 365 -ympäristössä, jonka käyttö edellyttää henkilökohtaisia tunnuksia.
+						Monivaiheinen tunnistautuminen on käytössä kaikilla {controller.company}:n työntekijöillä. Tietoihin
+						pääsy on rajattu vain niitä tarvitseville.
+					</p>
+
+					<h2>9. Selosteen muutokset</h2>
+					<p>Päivitämme selostetta tarvittaessa, esimerkiksi palveluiden tai lainsäädännön muuttuessa. Voimassa oleva versio on aina tällä sivulla.</p>
+				</article>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+	.page-hero {
+		background: var(--navy);
+		color: #e8eff5;
+		padding: 56px 0 64px;
+	}
+	.page-hero h1 {
+		color: var(--white);
+		font-size: clamp(2rem, 4.5vw, 3rem);
+		font-weight: 800;
+	}
+	.eyebrow-light {
+		color: #f0b286;
+	}
+	.back {
+		display: table;
+		color: #e8eff5;
+		text-decoration: none;
+		font-weight: 600;
+		font-size: 0.95rem;
+		margin-bottom: 28px;
+	}
+	.back:hover {
+		color: #f0b286;
+	}
+	.lead-light {
+		font-size: 1.05rem;
+		margin: 0;
+	}
+	.policy-section {
+		padding: 56px 0 96px;
+	}
+	.policy {
+		max-width: 800px;
+		background: var(--white);
+		border-radius: var(--radius);
+		box-shadow: var(--shadow);
+		border-top: 5px solid var(--orange);
+		padding: 48px 56px;
+	}
+	.policy h2 {
+		font-size: 1.35rem;
+		margin-top: 2.2em;
+	}
+	.policy h2:first-of-type {
+		margin-top: 0;
+	}
+	.policy h3 {
+		font-size: 1.05rem;
+		margin-top: 1.6em;
+	}
+	.policy ul {
+		padding-left: 22px;
+		margin: 0 0 1em;
+	}
+	.policy li {
+		margin-bottom: 6px;
+	}
+	.facts {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		gap: 8px 24px;
+		margin: 0;
+	}
+	.facts dt {
+		font-weight: 600;
+		color: var(--navy);
+	}
+	.facts dd {
+		margin: 0;
+	}
+	@media (max-width: 600px) {
+		.page-hero {
+			padding: 40px 0 48px;
+		}
+		.policy-section {
+			padding: 32px 0 64px;
+		}
+		.policy {
+			padding: 28px 22px;
+		}
+		.facts {
+			grid-template-columns: 1fr;
+			gap: 2px;
+		}
+		.facts dd {
+			margin-bottom: 10px;
+		}
+	}
+</style>

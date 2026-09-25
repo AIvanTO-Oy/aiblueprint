@@ -1,4 +1,13 @@
 ---
+// Fontit tarjoillaan sivuston omina tiedostoina (ei Google Fonts -latausta).
+import '@fontsource/montserrat/latin-500.css';
+import '@fontsource/montserrat/latin-600.css';
+import '@fontsource/montserrat/latin-700.css';
+import '@fontsource/montserrat/latin-800.css';
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+
 interface Props {
 	title: string;
 	description: string;
@@ -15,12 +24,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap"
-			rel="stylesheet"
-		/>
 		<title>{title}</title>
 	</head>
 	<body>
