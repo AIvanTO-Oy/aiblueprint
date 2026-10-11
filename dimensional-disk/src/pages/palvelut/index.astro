@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
+import Crack from '../../components/Crack.astro';
 import Footer from '../../components/Footer.astro';
 import ServiceGrid from '../../components/ServiceGrid.astro';
 import JourneySteps from '../../components/JourneySteps.astro';
@@ -18,7 +19,8 @@ const services = await getServices();
 	<Header />
 
 	<main>
-		<section class="page-hero">
+		<section class="page-hero surface-dark">
+			<Crack variant="white" class="hero-mark" />
 			<div class="container">
 				<a href={`${base}/`} class="back">← Takaisin etusivulle</a>
 				<span class="eyebrow eyebrow-light">Palvelut</span>
@@ -76,8 +78,6 @@ const services = await getServices();
 
 <style>
 	.page-hero {
-		background: var(--navy);
-		color: #e8eff5;
 		padding: 56px 0 120px;
 	}
 	.page-hero h1 {
@@ -86,18 +86,18 @@ const services = await getServices();
 		font-weight: 800;
 	}
 	.eyebrow-light {
-		color: #f0b286;
+		color: #eba27a;
 	}
 	.back {
 		display: table;
-		color: #e8eff5;
+		color: #e9edf2;
 		text-decoration: none;
 		font-weight: 600;
 		font-size: 0.95rem;
 		margin-bottom: 28px;
 	}
 	.back:hover {
-		color: #f0b286;
+		color: #eba27a;
 	}
 	.lead-light {
 		font-size: 1.15rem;
@@ -111,7 +111,7 @@ const services = await getServices();
 		margin-bottom: 44px;
 	}
 	.section-alt {
-		background: var(--cream-2);
+		background: var(--surface-2);
 	}
 	.cta-section {
 		padding: 96px 0;
@@ -122,7 +122,7 @@ const services = await getServices();
 		justify-content: space-between;
 		gap: 32px;
 		background: linear-gradient(120deg, var(--navy), var(--navy-2) 60%, var(--blue));
-		color: #e8eff5;
+		color: #e9edf2;
 		border-radius: var(--radius);
 		padding: 40px;
 		box-shadow: var(--shadow);

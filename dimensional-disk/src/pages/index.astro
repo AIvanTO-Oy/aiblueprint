@@ -79,7 +79,8 @@ const entryService = services.find((s) => s.data.slug === 'ai-lahtopiste') ?? se
 		</section>
 
 		<!-- YHTEYS -->
-		<section id="yhteys" class="section contact">
+		<section id="yhteys" class="section contact surface-dark">
+			<Crack variant="white" class="hero-mark" />
 			<div class="container contact-grid">
 				<div>
 					<span class="eyebrow eyebrow-light">Ota yhteyttä</span>
@@ -91,17 +92,17 @@ const entryService = services.find((s) => s.data.slug === 'ai-lahtopiste') ?? se
 				<a href={contactPage} class="contact-card">
 					<svg class="form-art" viewBox="0 0 240 150" aria-hidden="true">
 						<!-- Lomakearkki -->
-						<rect x="36" y="14" width="120" height="126" rx="10" fill="#ffffff" stroke="#dcd3c4"></rect>
-						<rect x="52" y="32" width="56" height="6" rx="3" fill="#0e2a47"></rect>
-						<rect x="52" y="50" width="88" height="14" rx="4" fill="#dce8f0"></rect>
-						<rect x="52" y="72" width="88" height="14" rx="4" fill="#dce8f0"></rect>
-						<rect x="52" y="94" width="88" height="24" rx="4" fill="#dce8f0"></rect>
-						<rect x="52" y="124" width="40" height="8" rx="4" fill="#a8531d"></rect>
+						<rect x="36" y="14" width="120" height="126" rx="10" fill="#ffffff" stroke="#dde2e9"></rect>
+						<rect x="52" y="32" width="56" height="6" rx="3" fill="#1c3453"></rect>
+						<rect x="52" y="50" width="88" height="14" rx="4" fill="#e3e8ef"></rect>
+						<rect x="52" y="72" width="88" height="14" rx="4" fill="#e3e8ef"></rect>
+						<rect x="52" y="94" width="88" height="24" rx="4" fill="#e3e8ef"></rect>
+						<rect x="52" y="124" width="40" height="8" rx="4" fill="#a0522f"></rect>
 						<!-- Paperilennokki -->
-						<path d="M150 70 L222 40 L196 112 L178 88 Z" fill="#c8733a"></path>
-						<path d="M178 88 L222 40 L186 96 Z" fill="#a8531d"></path>
-						<path d="M178 88 L184 108 L190 97 Z" fill="#0e2a47"></path>
-						<path d="M120 118 C 132 100, 140 96, 150 90" fill="none" stroke="#2f6a8f" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"></path>
+						<path d="M150 70 L222 40 L196 112 L178 88 Z" fill="#c8764b"></path>
+						<path d="M178 88 L222 40 L186 96 Z" fill="#a0522f"></path>
+						<path d="M178 88 L184 108 L190 97 Z" fill="#1c3453"></path>
+						<path d="M120 118 C 132 100, 140 96, 150 90" fill="none" stroke="#3a5a85" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"></path>
 					</svg>
 					<h3>Täytä yhteydenottolomake</h3>
 					<ul class="contact-points">
@@ -123,8 +124,8 @@ const entryService = services.find((s) => s.data.slug === 'ai-lahtopiste') ?? se
 		position: relative;
 		padding: 72px 0 0;
 		background:
-			radial-gradient(900px 400px at 85% 20%, rgba(47, 106, 143, 0.12), transparent 70%),
-			radial-gradient(600px 300px at 10% 90%, rgba(200, 115, 58, 0.1), transparent 70%);
+			radial-gradient(900px 400px at 85% 20%, rgba(58, 90, 133, 0.12), transparent 70%),
+			radial-gradient(600px 300px at 10% 90%, rgba(200, 118, 75, 0.1), transparent 70%);
 	}
 	.hero-grid {
 		display: grid;
@@ -158,7 +159,7 @@ const entryService = services.find((s) => s.data.slug === 'ai-lahtopiste') ?? se
 	.hero-facts {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 32px;
+		gap: 22px;
 		list-style: none;
 		padding: 0;
 		margin: 0;
@@ -178,13 +179,14 @@ const entryService = services.find((s) => s.data.slug === 'ai-lahtopiste') ?? se
 		font-size: 0.9rem;
 		color: var(--muted);
 	}
-	.hero-crack {
-		display: block;
+	.hero :global(.hero-crack) {
+		max-width: 1400px;
+		margin: 0 auto;
 	}
 
 	/* Palvelut */
 	.section-alt {
-		background: var(--cream-2);
+		background: var(--surface-2);
 	}
 	.section-head {
 		margin-bottom: 44px;
@@ -196,14 +198,12 @@ const entryService = services.find((s) => s.data.slug === 'ai-lahtopiste') ?? se
 
 	/* Yhteys */
 	.contact {
-		background: var(--navy);
-		color: #e8eff5;
 	}
 	.contact h2 {
 		color: var(--white);
 	}
 	.eyebrow-light {
-		color: #f0b286;
+		color: #eba27a;
 	}
 	.contact-grid {
 		display: grid;
@@ -218,7 +218,7 @@ const entryService = services.find((s) => s.data.slug === 'ai-lahtopiste') ?? se
 	.contact-card {
 		display: grid;
 		gap: 14px;
-		background: var(--cream);
+		background: var(--surface);
 		color: var(--ink);
 		border-radius: var(--radius);
 		padding: 32px 36px 36px;
@@ -231,7 +231,7 @@ const entryService = services.find((s) => s.data.slug === 'ai-lahtopiste') ?? se
 		box-shadow: 0 24px 40px -18px rgba(0, 0, 0, 0.5);
 	}
 	.contact-card:hover .btn {
-		background: #8f4415;
+		background: #874425;
 	}
 	.form-art {
 		width: 100%;

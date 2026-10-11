@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import Crack from '../components/Crack.astro';
 import Footer from '../components/Footer.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -20,7 +21,8 @@ const contacts = [
 	<Header />
 
 	<main>
-		<section class="contact-hero">
+		<section class="contact-hero surface-dark">
+			<Crack variant="white" class="hero-mark" />
 			<div class="container">
 				<a href={`${base}/`} class="back">← Takaisin etusivulle</a>
 				<span class="eyebrow eyebrow-light">Ota yhteyttä</span>
@@ -76,8 +78,6 @@ const contacts = [
 
 <style>
 	.contact-hero {
-		background: var(--navy);
-		color: #e8eff5;
 		padding: 56px 0 120px;
 	}
 	.contact-hero h1 {
@@ -87,18 +87,18 @@ const contacts = [
 		max-width: 760px;
 	}
 	.eyebrow-light {
-		color: #f0b286;
+		color: #eba27a;
 	}
 	.back {
 		display: table;
-		color: #e8eff5;
+		color: #e9edf2;
 		text-decoration: none;
 		font-weight: 600;
 		font-size: 0.95rem;
 		margin-bottom: 28px;
 	}
 	.back:hover {
-		color: #f0b286;
+		color: #eba27a;
 	}
 	.lead-light {
 		font-size: 1.15rem;

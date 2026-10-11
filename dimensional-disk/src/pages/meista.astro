@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import Crack from '../components/Crack.astro';
 import Footer from '../components/Footer.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -48,7 +49,8 @@ const team = [
 	<Header />
 
 	<main>
-		<section class="page-hero">
+		<section class="page-hero surface-dark">
+			<Crack variant="white" class="hero-mark" />
 			<div class="container">
 				<a href={`${base}/`} class="back">← Takaisin etusivulle</a>
 				<span class="eyebrow eyebrow-light">AIvanTO Oy</span>
@@ -126,8 +128,6 @@ const team = [
 
 <style>
 	.page-hero {
-		background: var(--navy);
-		color: #e8eff5;
 		padding: 56px 0 120px;
 	}
 	.page-hero h1 {
@@ -136,18 +136,18 @@ const team = [
 		font-weight: 800;
 	}
 	.eyebrow-light {
-		color: #f0b286;
+		color: #eba27a;
 	}
 	.back {
 		display: table;
-		color: #e8eff5;
+		color: #e9edf2;
 		text-decoration: none;
 		font-weight: 600;
 		font-size: 0.95rem;
 		margin-bottom: 28px;
 	}
 	.back:hover {
-		color: #f0b286;
+		color: #eba27a;
 	}
 	.lead-light {
 		font-size: 1.15rem;
@@ -177,8 +177,8 @@ const team = [
 		display: grid;
 		place-items: center;
 		background:
-			linear-gradient(135deg, rgba(47, 106, 143, 0.18), rgba(200, 115, 58, 0.18)),
-			var(--cream-2);
+			linear-gradient(135deg, rgba(58, 90, 133, 0.18), rgba(200, 118, 75, 0.18)),
+			var(--surface-2);
 		border-bottom: 4px solid var(--orange);
 	}
 	.photo img {
@@ -298,7 +298,7 @@ const team = [
 		justify-content: space-between;
 		gap: 32px;
 		background: linear-gradient(120deg, var(--navy), var(--navy-2) 60%, var(--blue));
-		color: #e8eff5;
+		color: #e9edf2;
 		border-radius: var(--radius);
 		padding: 40px;
 		box-shadow: var(--shadow);

@@ -33,23 +33,29 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 <style is:global>
 	:root {
-		/* Logon värit */
-		--navy: #0e2a47;
-		--navy-2: #173a5e;
-		--blue: #2f6a8f;
-		--blue-soft: #dce8f0;
-		--orange: #c8733a;
-		--orange-dark: #a8531d; /* tekstikäyttöön, riittävä kontrasti */
-		--orange-soft: #f6e4d4;
-		--cream: #f7f2ea;
-		--cream-2: #efe7da;
+		/* Brändivärit (logo: navy, kupari, kiven siniharmaat; mustavalkoiset versiot) */
+		--navy: #1c3453;
+		--navy-2: #243f66;
+		--blue: #3a5a85;
+		--blue-soft: #e3e8ef;
+		--orange: #c8764b;
+		--orange-dark: #a0522f; /* tekstikäyttöön, riittävä kontrasti */
+		--orange-soft: #f7e6dc;
+		--surface: #ffffff;
+		--surface-2: #f2f4f7;
 		--white: #ffffff;
-		--ink: #13263b;
-		--muted: #4a5d70;
-		--line: #dcd3c4;
+		--ink: #111a26;
+		--muted: #4b5a6e;
+		--line: #dde2e9;
+		--black: #0a0b0d; /* valkoinen logo mustalla pohjalla */
+		--black-2: #15181d;
+		--on-dark: #e9edf2;
+		--on-dark-accent: #eba27a;
+		--copper-gradient: linear-gradient(90deg, #a0522f, #e79664 45%, #c8764b 75%, #a0522f);
+		--facets-dark: url('/brand/facets-dark.svg');
 
 		--radius: 14px;
-		--shadow: 0 10px 30px -12px rgba(14, 42, 71, 0.25);
+		--shadow: 0 10px 30px -12px rgba(28, 52, 83, 0.25);
 		--max: 1160px;
 		--font-head: 'Montserrat', system-ui, sans-serif;
 		--font-body: 'Inter', system-ui, sans-serif;
@@ -68,7 +74,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 	body {
 		margin: 0;
-		background: var(--cream);
+		background: var(--surface);
 		color: var(--ink);
 		font-family: var(--font-body);
 		font-size: 17px;
@@ -166,11 +172,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 	.btn-primary {
 		background: var(--orange-dark);
 		color: var(--white);
-		box-shadow: 0 8px 20px -8px rgba(168, 83, 29, 0.6);
+		box-shadow: 0 8px 20px -8px rgba(160, 82, 47, 0.6);
 	}
 
 	.btn-primary:hover {
-		background: #8f4415;
+		background: #874425;
 	}
 
 	.btn-secondary {
@@ -189,6 +195,32 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		color: var(--navy);
 	}
 
+	/* Tumma brändipinta: valkoinen mustalla, logon kivipinta tekstuurina */
+	.surface-dark {
+		position: relative;
+		overflow: hidden;
+		background: var(--facets-dark) center / 480px auto, var(--black);
+		color: var(--on-dark);
+	}
+	.surface-dark > .container {
+		position: relative;
+		z-index: 1;
+	}
+	/* Valkoinen halkeama koristekuvana tumman pinnan taustalla */
+	.surface-dark > svg.hero-mark {
+		position: absolute;
+		right: -3%;
+		top: 46%;
+		width: min(520px, 36%);
+		opacity: 0.16;
+		pointer-events: none;
+	}
+	@media (max-width: 1100px) {
+		.surface-dark > svg.hero-mark {
+			display: none;
+		}
+	}
+
 	@media (max-width: 720px) {
 		body {
 			font-size: 16px;
@@ -198,6 +230,34 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		}
 		.container {
 			padding: 0 16px;
+		}
+	}
+
+	/* Tulostus: musta logo valkoisella pohjalla, tummat pinnat vaaleiksi */
+	@media print {
+		.site-header {
+			position: static !important;
+		}
+		.main-nav,
+		.header-actions,
+		.surface-dark > svg.hero-mark {
+			display: none !important;
+		}
+		.brand img,
+		.footer-logo {
+			content: url('/aivanto-logo-black.png');
+		}
+		.surface-dark,
+		.site-footer {
+			background: #ffffff !important;
+			color: #0a0b0d !important;
+		}
+		.surface-dark :is(h1, h2, h3, p, a, span),
+		.site-footer :is(p, a) {
+			color: #0a0b0d !important;
+		}
+		.crack-white polygon {
+			fill: #0a0b0d;
 		}
 	}
 

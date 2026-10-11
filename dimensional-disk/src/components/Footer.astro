@@ -7,9 +7,11 @@ const businessId = '3610409-8';
 ---
 
 <footer class="site-footer">
-	<Crack />
+	<div class="container">
+		<Crack variant="white" class="footer-crack" />
+	</div>
 	<div class="container footer-inner">
-		<img src={`${base}/aivanto-logo.png`} alt="AIvanTO" class="footer-logo" width="1003" height="240" loading="lazy" />
+		<img src={`${base}/aivanto-logo-white.png`} alt="AIvanTO" class="footer-logo" width="1003" height="254" loading="lazy" />
 		<p>{company} • Y-tunnus {businessId}</p>
 		<p class="footer-links">
 			<a href={`${base}/palvelut/`}>Palvelut</a>
@@ -21,9 +23,15 @@ const businessId = '3610409-8';
 </footer>
 
 <style>
+	/* Valkoinen logo mustalla pohjalla */
 	.site-footer {
-		background: var(--cream);
-		padding: 24px 0 40px;
+		background: var(--facets-dark) center / 480px auto, var(--black);
+		color: var(--on-dark);
+		padding: 0 0 40px;
+	}
+	.footer-crack {
+		opacity: 0.9;
+		margin-bottom: 28px;
 	}
 	.footer-inner {
 		display: flex;
@@ -31,7 +39,7 @@ const businessId = '3610409-8';
 		justify-content: space-between;
 		flex-wrap: wrap;
 		gap: 16px;
-		color: var(--muted);
+		color: #b9c2ce;
 		font-size: 0.92rem;
 	}
 	.footer-inner p {
@@ -39,14 +47,15 @@ const businessId = '3610409-8';
 	}
 	.footer-links {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 20px;
 	}
 	.footer-inner a {
-		color: var(--navy);
+		color: var(--white);
 		font-weight: 600;
 	}
 	.footer-inner a:hover {
-		color: var(--orange-dark);
+		color: var(--on-dark-accent);
 	}
 	.footer-logo {
 		height: 48px;

@@ -34,7 +34,7 @@ const { Content } = await render(service);
 
 	<main>
 		<ServiceHero slug={data.slug} title={data.title} subtitle={data.subtitle} badge={data.badge} />
-		<Crack />
+		<Crack variant="black" class="hero-crack" />
 
 		<section class="section intro-section">
 			<div class="container intro-grid">
@@ -86,6 +86,11 @@ const { Content } = await render(service);
 </Layout>
 
 <style>
+	/* Musta hero "halkeaa" valkoiselle pohjalle (musta valkoisella -versio) */
+	main > :global(.hero-crack) {
+		max-width: 1400px;
+		margin: 0 auto;
+	}
 	.intro-section {
 		padding-top: 64px;
 	}
@@ -105,7 +110,7 @@ const { Content } = await render(service);
 		max-width: 620px;
 	}
 	.section-alt {
-		background: var(--cream-2);
+		background: var(--surface-2);
 	}
 	.detail-grid {
 		display: grid;

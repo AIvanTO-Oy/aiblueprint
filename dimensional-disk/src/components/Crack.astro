@@ -1,23 +1,48 @@
 ---
-// Logon "halkeama"-aihe koristeellisena erottimena.
+// Logon "halkeama" koristeellisena erottimena ja kuvituksena.
+// color = värilogon kuparipinta ja fasettikivi, white = valkoinen mustalla pohjalla,
+// black = musta valkoisella pohjalla.
+import { CRACK_H, CRACK_W, copper, crackPolygon, facets, rockShades } from '../lib/brand';
+
 interface Props {
+	variant?: 'color' | 'white' | 'black';
 	class?: string;
 }
-const { class: className = '' } = Astro.props;
+const { variant = 'color', class: className = '' } = Astro.props;
+const id = `crack-${Math.random().toString(36).slice(2, 9)}`;
+const rock = variant === 'color' ? facets(CRACK_W, CRACK_H, 46, 4, rockShades, 11) : [];
 ---
 
-<svg class={`crack ${className}`} viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
-	<path
-		d="M0 12 L420 14 L470 34 L455 24 L520 40 L560 16 L610 58 L650 18 L760 16 L800 32 L790 18 L1200 12 L790 20 L660 22 L612 46 L566 22 L525 30 L480 20 L425 18 Z"
-		fill="#173a5e"></path>
-	<path d="M0 12 L420 14 L560 16 L650 18 L760 16 L1200 12 L760 14 L650 15 L560 14 L420 12 Z" fill="#c8733a"></path>
-	<path d="M560 16 L610 58 L612 46 L566 22 Z" fill="#2f6a8f"></path>
-	<path d="M760 16 L800 32 L790 18 Z" fill="#a8531d"></path>
+<svg class={`crack crack-${variant} ${className}`} viewBox={`0 0 ${CRACK_W} ${CRACK_H}`} aria-hidden="true">
+	{
+		variant === 'color' ? (
+			<>
+				<defs>
+					<clipPath id={`${id}-clip`}>
+						<polygon points={crackPolygon} />
+					</clipPath>
+					<linearGradient id={`${id}-cu`} x1="0" y1="0" x2="0" y2="1">
+						<stop offset="0" stop-color={copper.light} />
+						<stop offset="0.55" stop-color={copper.base} />
+						<stop offset="1" stop-color={copper.dark} />
+					</linearGradient>
+				</defs>
+				<g clip-path={`url(#${id}-clip)`}>
+					{rock.map((f) => <polygon points={f.points} fill={f.fill} stroke={f.fill} stroke-width="0.6" />)}
+					<rect x="0" y="0" width={CRACK_W} height="16" fill={`url(#${id}-cu)`} />
+					<rect x="0" y="0" width={CRACK_W} height="2" fill="#f3b48d" />
+				</g>
+			</>
+		) : (
+			<polygon points={crackPolygon} fill={variant === 'white' ? '#ffffff' : '#0a0b0d'} />
+		)
+	}
 </svg>
 
 <style>
 	.crack {
+		display: block;
 		width: 100%;
-		height: 40px;
+		height: auto;
 	}
 </style>
