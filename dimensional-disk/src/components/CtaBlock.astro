@@ -1,0 +1,49 @@
+---
+import { contactPage, type Service } from '../lib/services';
+
+interface Props {
+	service: Service;
+}
+const { service } = Astro.props;
+const { heading, body, button } = service.data.cta;
+---
+
+<aside class="cta-block">
+	<div>
+		<h2>{heading}</h2>
+		<p>{body}</p>
+	</div>
+	<a href={contactPage} class="btn btn-primary">{button} <span aria-hidden="true">→</span></a>
+</aside>
+
+<style>
+	.cta-block {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 32px;
+		background: var(--orange-soft);
+		border-left: 6px solid var(--orange-dark);
+		border-radius: var(--radius);
+		padding: 40px;
+		box-shadow: var(--shadow);
+	}
+	h2 {
+		font-size: 1.6rem;
+	}
+	p {
+		margin: 0;
+		max-width: 640px;
+		color: var(--ink);
+	}
+	.btn {
+		flex: none;
+	}
+	@media (max-width: 900px) {
+		.cta-block {
+			flex-direction: column;
+			align-items: flex-start;
+			padding: 28px;
+		}
+	}
+</style>

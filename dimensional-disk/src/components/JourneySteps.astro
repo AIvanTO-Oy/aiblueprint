@@ -1,0 +1,113 @@
+---
+// "Miten etenemme" -polku: vaakasuuntainen askelrivi, mobiilissa pystyyn.
+import { serviceUrl, type Service } from '../lib/services';
+
+interface Props {
+	services: Service[];
+}
+const { services } = Astro.props;
+---
+
+<ol class="steps">
+	{
+		services.map((s, i) => (
+			<li class="step">
+				<span class="step-num">{i + 1}</span>
+				<h3>
+					<a href={serviceUrl(s)}>{s.data.title}</a>
+				</h3>
+				<p>{s.data.subtitle}</p>
+			</li>
+		))
+	}
+</ol>
+
+<style>
+	.steps {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		gap: 18px;
+		position: relative;
+	}
+	.steps::before {
+		content: '';
+		position: absolute;
+		top: 28px;
+		left: 8%;
+		right: 8%;
+		height: 3px;
+		background: linear-gradient(90deg, var(--orange), var(--blue));
+		border-radius: 2px;
+	}
+	.step {
+		position: relative;
+		text-align: center;
+		padding: 0 4px;
+	}
+	.step-num {
+		position: relative;
+		display: grid;
+		place-items: center;
+		width: 58px;
+		height: 58px;
+		margin: 0 auto 18px;
+		border-radius: 50%;
+		background: var(--navy);
+		color: var(--white);
+		font-family: var(--font-head);
+		font-weight: 800;
+		font-size: 1.3rem;
+		box-shadow: 0 0 0 6px var(--step-ring, var(--cream));
+	}
+	.step:first-child .step-num {
+		background: var(--orange-dark);
+	}
+	.step h3 {
+		font-size: 1.05rem;
+	}
+	.step h3 a {
+		color: inherit;
+		text-decoration: none;
+		border-bottom: 2px solid transparent;
+	}
+	.step h3 a:hover {
+		border-bottom-color: var(--orange);
+	}
+	.step p {
+		color: var(--muted);
+		font-size: 0.93rem;
+		margin: 0;
+	}
+	@media (max-width: 900px) {
+		.steps {
+			grid-template-columns: 1fr;
+			gap: 0;
+		}
+		.steps::before {
+			top: 10px;
+			bottom: 10px;
+			left: 28px;
+			right: auto;
+			width: 3px;
+			height: auto;
+			background: linear-gradient(180deg, var(--orange), var(--blue));
+		}
+		.step {
+			display: grid;
+			grid-template-columns: 58px 1fr;
+			column-gap: 20px;
+			text-align: left;
+			padding: 0 0 28px;
+		}
+		.step-num {
+			grid-row: span 2;
+			margin: 0;
+		}
+		.step h3 {
+			margin: 8px 0 2px;
+		}
+	}
+</style>

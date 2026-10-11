@@ -1,0 +1,31 @@
+---
+import ServiceCard from './ServiceCard.astro';
+import type { Service } from '../lib/services';
+
+interface Props {
+	services: Service[];
+}
+const { services } = Astro.props;
+---
+
+<div class="service-grid">
+	{services.map((s) => <ServiceCard service={s} />)}
+</div>
+
+<style>
+	.service-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 32px 24px;
+	}
+	@media (max-width: 1024px) {
+		.service-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+	@media (max-width: 640px) {
+		.service-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

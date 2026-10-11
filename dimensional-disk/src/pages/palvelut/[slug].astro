@@ -1,0 +1,166 @@
+---
+import { render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Crack from '../../components/Crack.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+import BenefitList from '../../components/BenefitList.astro';
+import HowItWorks from '../../components/HowItWorks.astro';
+import PriceBox from '../../components/PriceBox.astro';
+import CtaBlock from '../../components/CtaBlock.astro';
+import { getServices, serviceUrl, type Service } from '../../lib/services';
+
+export async function getStaticPaths() {
+	const services = await getServices();
+	return services.map((service, i) => ({
+		params: { slug: service.data.slug },
+		props: { service, prev: services[i - 1], next: services[i + 1] },
+	}));
+}
+
+interface Props {
+	service: Service;
+	prev?: Service;
+	next?: Service;
+}
+const { service, prev, next } = Astro.props;
+const { data } = service;
+const { Content } = await render(service);
+---
+
+<Layout title={data.seo.title} description={data.seo.description}>
+	<Header />
+
+	<main>
+		<ServiceHero slug={data.slug} title={data.title} subtitle={data.subtitle} badge={data.badge} />
+		<Crack />
+
+		<section class="section intro-section">
+			<div class="container intro-grid">
+				<div class="description">
+					<span class="eyebrow">Kuvaus</span>
+					<Content />
+				</div>
+				<BenefitList benefits={data.benefits} />
+			</div>
+		</section>
+
+		<section class="section section-alt">
+			<div class="container">
+				<div class="detail-grid">
+					<HowItWorks text={data.howItWorks} />
+					<PriceBox price={data.price} />
+				</div>
+				<div class="cta-wrap">
+					<CtaBlock service={service} />
+				</div>
+			</div>
+		</section>
+
+		<nav class="journey-nav" aria-label="Palvelut järjestyksessä">
+			<div class="container journey-inner">
+				{
+					prev ? (
+						<a href={serviceUrl(prev)} class="journey-link">
+							<span class="dir">← Edellinen palvelu</span>
+							<span class="name">{prev.data.title}</span>
+						</a>
+					) : (
+						<span />
+					)
+				}
+				{
+					next && (
+						<a href={serviceUrl(next)} class="journey-link next">
+							<span class="dir">Seuraava palvelu →</span>
+							<span class="name">{next.data.title}</span>
+						</a>
+					)
+				}
+			</div>
+		</nav>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+	.intro-section {
+		padding-top: 64px;
+	}
+	.intro-grid {
+		display: grid;
+		grid-template-columns: 1.15fr 1fr;
+		gap: 48px;
+		align-items: start;
+	}
+	.intro-grid > *,
+	.detail-grid > * {
+		min-width: 0;
+	}
+	.description :global(p) {
+		font-size: 1.15rem;
+		color: var(--ink);
+		max-width: 620px;
+	}
+	.section-alt {
+		background: var(--cream-2);
+	}
+	.detail-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 24px;
+		align-items: start;
+	}
+	.cta-wrap {
+		margin-top: 32px;
+	}
+	.journey-nav {
+		border-top: 1px solid var(--line);
+		padding: 32px 0 8px;
+	}
+	.journey-inner {
+		display: flex;
+		justify-content: space-between;
+		gap: 16px;
+		flex-wrap: wrap;
+	}
+	.journey-link {
+		display: grid;
+		gap: 2px;
+		text-decoration: none;
+	}
+	.journey-link.next {
+		text-align: right;
+		margin-left: auto;
+	}
+	.dir {
+		font-size: 0.85rem;
+		color: var(--muted);
+		font-weight: 600;
+	}
+	.name {
+		font-family: var(--font-head);
+		font-weight: 700;
+		color: var(--navy);
+		font-size: 1.1rem;
+	}
+	.journey-link:hover .name {
+		color: var(--orange-dark);
+	}
+	@media (max-width: 900px) {
+		.intro-grid,
+		.detail-grid {
+			grid-template-columns: 1fr;
+		}
+		.intro-grid {
+			gap: 32px;
+		}
+	}
+	@media (max-width: 600px) {
+		.intro-section {
+			padding-top: 48px;
+		}
+	}
+</style>

@@ -1,0 +1,56 @@
+---
+interface Props {
+	benefits: string[];
+}
+const { benefits } = Astro.props;
+---
+
+<div class="panel panel-dark">
+	<h2>Mitä saatte</h2>
+	<ul class="benefits">
+		{benefits.map((b) => <li>{b}</li>)}
+	</ul>
+</div>
+
+<style>
+	.panel-dark {
+		background: var(--navy);
+		color: #e8eff5;
+		border-radius: var(--radius);
+		padding: 36px;
+		box-shadow: var(--shadow);
+	}
+	h2 {
+		color: var(--white);
+		font-size: 1.4rem;
+	}
+	.benefits {
+		list-style: none;
+		padding: 0;
+		margin: 16px 0 0;
+		display: grid;
+		gap: 16px;
+	}
+	.benefits li {
+		position: relative;
+		padding-left: 34px;
+		font-weight: 500;
+	}
+	.benefits li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 4px;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background: var(--orange)
+			url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e2a47' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E")
+			center / 13px no-repeat;
+	}
+	@media (max-width: 600px) {
+		.panel-dark {
+			padding: 24px;
+		}
+	}
+</style>

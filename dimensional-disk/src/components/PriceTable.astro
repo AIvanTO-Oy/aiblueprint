@@ -1,0 +1,166 @@
+---
+import { serviceUrl, type Service } from '../lib/services';
+
+interface Props {
+	services: Service[];
+}
+const { services } = Astro.props;
+---
+
+<div class="table-wrap">
+	<table class="price-table">
+		<caption class="visually-hidden">Palveluiden hinnat (alv 0 %)</caption>
+		<thead>
+			<tr>
+				<th scope="col">Palvelu</th>
+				<th scope="col">Hinta <span class="vat">(alv 0 %)</span></th>
+				<th scope="col">Hinnoitteluperuste</th>
+			</tr>
+		</thead>
+		<tbody>
+			{
+				services.map((s) => (
+					<tr>
+						<th scope="row">
+							<a href={serviceUrl(s)}>{s.data.title}</a>
+						</th>
+						<td class="price">
+							{s.data.price.tableDisplay ?? s.data.price.display}
+							{s.data.price.isProposal && (
+								<span class="indicative">
+									<sup aria-hidden="true">*</sup>
+									<span class="visually-hidden">suuntaa antava hinta</span>
+								</span>
+							)}
+						</td>
+						<td>{s.data.price.basis}</td>
+					</tr>
+				))
+			}
+		</tbody>
+	</table>
+</div>
+<p class="footnote">
+	* Suuntaa antava hinta. Hinnoittelu tarkennetaan aina projektin määrittelyn yhteydessä.<br />
+	Hinnat eivät sisällä kolmansien osapuolten lisenssi- tai pilvikustannuksia (esim. Power Platform, Copilot, Copilot
+	Studio, Azure). Lisätyöt sovitaan erikseen.
+</p>
+
+<style>
+	.table-wrap {
+		background: var(--white);
+		border-radius: var(--radius);
+		box-shadow: var(--shadow);
+		border-top: 5px solid var(--orange);
+		overflow-x: auto;
+	}
+	.price-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.98rem;
+	}
+	th,
+	td {
+		text-align: left;
+		padding: 18px 24px;
+		border-bottom: 1px solid var(--line);
+		vertical-align: top;
+	}
+	tbody tr:last-child > * {
+		border-bottom: 0;
+	}
+	thead th {
+		font-family: var(--font-head);
+		font-size: 0.8rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--muted);
+		background: var(--cream);
+	}
+	thead .vat {
+		text-transform: none;
+		letter-spacing: 0;
+	}
+	tbody th {
+		font-family: var(--font-head);
+		font-weight: 700;
+		white-space: nowrap;
+	}
+	tbody th a {
+		color: var(--navy);
+		text-decoration: none;
+		border-bottom: 2px solid var(--blue-soft);
+	}
+	tbody th a:hover {
+		border-bottom-color: var(--orange);
+	}
+	.price {
+		font-family: var(--font-head);
+		font-weight: 700;
+		color: var(--navy);
+	}
+	.indicative sup {
+		color: var(--orange-dark);
+		font-weight: 800;
+		margin-left: 2px;
+	}
+	td:last-child {
+		color: var(--muted);
+	}
+	.footnote {
+		margin: 16px 0 0;
+		font-size: 0.9rem;
+		color: var(--muted);
+		font-style: italic;
+	}
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+	}
+	/* Mobiilissa rivit kortteina */
+	@media (max-width: 720px) {
+		.table-wrap {
+			overflow: visible;
+		}
+		thead {
+			display: none;
+		}
+		.price-table,
+		tbody,
+		tr,
+		th,
+		td {
+			display: block;
+		}
+		tbody tr {
+			padding: 18px 20px;
+			border-bottom: 1px solid var(--line);
+		}
+		tbody tr:last-child {
+			border-bottom: 0;
+		}
+		th,
+		td {
+			padding: 0;
+			border: 0;
+		}
+		tbody th {
+			white-space: normal;
+			margin-bottom: 6px;
+		}
+		td.price::after {
+			content: ' (alv 0 %)';
+			font-family: var(--font-body);
+			font-weight: 500;
+			font-size: 0.85rem;
+			color: var(--muted);
+		}
+		td:last-child {
+			font-size: 0.92rem;
+		}
+	}
+</style>

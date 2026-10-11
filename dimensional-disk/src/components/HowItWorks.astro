@@ -1,0 +1,50 @@
+---
+interface Props {
+	text: string;
+}
+const { text } = Astro.props;
+---
+
+<div class="how">
+	<span class="how-icon" aria-hidden="true">
+		<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+			<path d="M5 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM19 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM7 17h8a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h8"></path>
+		</svg>
+	</span>
+	<h2>Näin helppoa se on</h2>
+	<p>{text}</p>
+</div>
+
+<style>
+	.how {
+		height: 100%;
+		background: var(--white);
+		border-radius: var(--radius);
+		border-top: 4px solid var(--blue);
+		padding: 36px;
+		box-shadow: var(--shadow);
+	}
+	.how-icon {
+		display: grid;
+		place-items: center;
+		width: 56px;
+		height: 56px;
+		border-radius: 14px;
+		background: var(--blue-soft);
+		color: var(--navy);
+		margin-bottom: 18px;
+	}
+	h2 {
+		font-size: 1.4rem;
+	}
+	p {
+		font-size: 1.12rem;
+		color: var(--ink);
+		margin: 0;
+	}
+	@media (max-width: 600px) {
+		.how {
+			padding: 24px;
+		}
+	}
+</style>

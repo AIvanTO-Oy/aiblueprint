@@ -1,0 +1,115 @@
+---
+import { indicativePriceNote, type Service } from '../lib/services';
+
+interface Props {
+	price: Service['data']['price'];
+}
+const { price } = Astro.props;
+---
+
+<div class="price-box">
+	<h2>Hinta</h2>
+	{
+		price.tiers ? (
+			<>
+				<table class="tiers">
+					<caption>{price.basis}</caption>
+					<tbody>
+						{price.tiers.map((t) => (
+							<tr>
+								<th scope="row">{t.label}</th>
+								<td>{t.price}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+				<p class="vat">Hinnat alv 0 %</p>
+			</>
+		) : (
+			<>
+				<p class="price">{price.display}</p>
+				<p class="basis">{price.basis}</p>
+				<p class="vat">alv 0 %</p>
+			</>
+		)
+	}
+	{price.isProposal && <p class="indicative">{indicativePriceNote}</p>}
+</div>
+
+<style>
+	.price-box {
+		height: 100%;
+		background: var(--white);
+		border: 2px solid var(--orange);
+		border-radius: var(--radius);
+		padding: 36px;
+		box-shadow: var(--shadow);
+	}
+	h2 {
+		font-size: 1.4rem;
+	}
+	.price {
+		font-family: var(--font-head);
+		font-weight: 800;
+		font-size: 2.2rem;
+		color: var(--navy);
+		line-height: 1.1;
+		margin-bottom: 10px;
+	}
+	.basis {
+		font-weight: 600;
+		color: var(--ink);
+		margin-bottom: 4px;
+	}
+	.vat {
+		font-size: 0.9rem;
+		color: var(--muted);
+		margin: 0 0 8px;
+	}
+	.indicative {
+		margin: 16px 0 0;
+		padding: 12px 14px;
+		background: var(--orange-soft);
+		border-radius: 10px;
+		font-size: 0.92rem;
+		color: var(--ink);
+	}
+	.tiers {
+		width: 100%;
+		border-collapse: collapse;
+		margin-bottom: 12px;
+	}
+	.tiers caption {
+		text-align: left;
+		font-weight: 600;
+		color: var(--muted);
+		font-size: 0.95rem;
+		padding-bottom: 8px;
+	}
+	.tiers th,
+	.tiers td {
+		padding: 10px 0;
+		border-bottom: 1px solid var(--line);
+		vertical-align: top;
+	}
+	.tiers th {
+		text-align: left;
+		font-weight: 500;
+		padding-right: 16px;
+	}
+	.tiers td {
+		text-align: right;
+		font-family: var(--font-head);
+		font-weight: 800;
+		color: var(--navy);
+		white-space: nowrap;
+	}
+	@media (max-width: 600px) {
+		.price-box {
+			padding: 24px;
+		}
+		.tiers td {
+			white-space: normal;
+		}
+	}
+</style>

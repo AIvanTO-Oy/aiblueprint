@@ -1,0 +1,147 @@
+---
+import { serviceIcons, serviceUrl, type Service } from '../lib/services';
+
+interface Props {
+	service: Service;
+}
+const { service } = Astro.props;
+const { slug, title, subtitle, summary, badge, price } = service.data;
+---
+
+<article class:list={['service-card', { highlighted: !!badge }]}>
+	{badge && <span class="badge">{badge}</span>}
+	<span class="icon" aria-hidden="true">
+		<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+			<path d={serviceIcons[slug]} />
+		</svg>
+	</span>
+	<h3><a href={serviceUrl(service)}>{title}</a></h3>
+	<p class="subtitle">{subtitle}</p>
+	<p class="summary">{summary}</p>
+	<div class="card-foot">
+		<p class="price">
+			{price.display}
+			<span class="vat">alv 0 %{price.isProposal && ', suuntaa antava'}</span>
+		</p>
+		<span class="more" aria-hidden="true">Lue lisää →</span>
+	</div>
+</article>
+
+<style>
+	.service-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		background: var(--white);
+		border: 1px solid var(--line);
+		border-top: 4px solid var(--blue);
+		border-radius: var(--radius);
+		padding: 30px 28px 26px;
+		box-shadow: var(--shadow);
+		transition: transform 0.15s ease, box-shadow 0.15s ease;
+	}
+	.service-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 18px 36px -16px rgba(14, 42, 71, 0.35);
+	}
+	.service-card:focus-within {
+		outline: 3px solid var(--orange);
+		outline-offset: 3px;
+	}
+	.service-card.highlighted {
+		border: 2px solid var(--orange);
+		border-top-width: 4px;
+	}
+	.badge {
+		position: absolute;
+		top: -14px;
+		left: 24px;
+		background: var(--orange-dark);
+		color: var(--white);
+		font-family: var(--font-head);
+		font-weight: 700;
+		font-size: 0.74rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		padding: 5px 14px;
+		border-radius: 999px;
+	}
+	.icon {
+		display: grid;
+		place-items: center;
+		width: 48px;
+		height: 48px;
+		border-radius: 12px;
+		background: var(--blue-soft);
+		color: var(--navy);
+		margin-bottom: 18px;
+	}
+	.highlighted .icon {
+		background: var(--orange-soft);
+		color: var(--orange-dark);
+	}
+	h3 {
+		font-size: 1.3rem;
+		margin-bottom: 4px;
+	}
+	/* Koko kortti on klikattava otsikkolinkin kautta */
+	h3 a {
+		color: inherit;
+		text-decoration: none;
+	}
+	h3 a::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: var(--radius);
+	}
+	h3 a:focus-visible {
+		outline: none;
+	}
+	.subtitle {
+		font-family: var(--font-head);
+		font-weight: 600;
+		font-size: 0.95rem;
+		color: var(--orange-dark);
+		margin-bottom: 12px;
+	}
+	.summary {
+		color: var(--muted);
+		font-size: 0.97rem;
+		flex: 1;
+	}
+	.card-foot {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 16px;
+		border-top: 1px solid var(--line);
+		padding-top: 16px;
+		margin-top: 4px;
+	}
+	.price {
+		font-family: var(--font-head);
+		font-weight: 800;
+		font-size: 1.1rem;
+		color: var(--navy);
+		line-height: 1.25;
+		margin: 0;
+	}
+	.vat {
+		display: block;
+		font-family: var(--font-body);
+		font-size: 0.8rem;
+		font-weight: 500;
+		color: var(--muted);
+	}
+	.more {
+		flex: none;
+		font-family: var(--font-head);
+		font-weight: 700;
+		font-size: 0.9rem;
+		color: var(--blue);
+	}
+	.service-card:hover .more {
+		color: var(--orange-dark);
+	}
+</style>
